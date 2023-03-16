@@ -6,7 +6,7 @@
     <style>
       /* root */
       :root {
-        --color-for-highlighting: #FFF97A;
+        --color-for-highlighting: pink;
         --root-font-size: 16px;
       }
       *,
@@ -42,236 +42,242 @@
         padding: 0;
         position: absolute;
       }
+      
+      .resizable {
+        width: 120px;
+        resize: horizontal;
+        overflow: auto;
+        border: 1px dashed lightgray
+      }
+
       /* reset default browser styles */
       a {
         color: initial;
         text-decoration: none;
       }
-      /* states 
-      a:hover {
-        color: red;
-      }
-      a:focus {
 
-      }*/
 
-      .link-text {
-        color: blue;
-        text-decoration: underline;
-      }
+      /* styles */
 
-      .link {
-        align-items: center;
-        box-shadow: inset 0 -1px blue;
-        display: inline-flex;
-        color: blue;
-        padding: 12px 0;
-        text-align: center;
-        gap: 12px;
-      }
-        .link__text {
-          text-align: left;
-          hyphens: auto;
-          -ms-hyphens: auto;
-          -moz-hyphens: auto;
-          -webkit-hyphens: auto;
-        }
-        .link__icon {
-          flex-shrink: 0;
-        }
+.link-text {
+   /* base styles */
+  text-decoration: underline;
+  /* theme styles */
+  color: blue;
+}
+
+.link {
+  /* base styles */
+  align-items: center;
+  display: inline-flex;
+  text-align: center;
+  gap: 12px;
+  padding-top: 12px;
+  padding-bottom: 12px;
+  /* handle long words */
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  word-break: break-all;
+  word-break: break-word;
+  /* theme */
+  color: blue;
+  box-shadow: inset 0 -1px currentColor;
+}
+.link__icon {
+  flex-shrink: 0;
+}
+.link__text {
+  text-align: left;
+}
+
+.link--button {
+  /* theme */
+  border-radius: 8px;
+  box-shadow: inset 0 0 0 1px currentColor;
+  padding-left: 6px;
+  padding-right: 6px;
+}
+
       
-      .link-button {
-        align-items: center;
-        border-radius: 8px;
-        box-shadow: inset 0 0 0 1px blue;
-        display: inline-flex;
-        color: blue;
-        text-align: center;
-        padding: 12px 6px;
-        gap: 12px;
-      }
-        .link-button__icon {
-          flex-shrink: 0;
-        }
-        .link-button__icon + .link-button__text {
-          text-align: left;
-        }
-        .link-button__text {
-          hyphens: auto;
-          -ms-hyphens: auto;
-          -moz-hyphens: auto;
-          -webkit-hyphens: auto;
-        }
+.link-icon {
+  /* base styles */
+  align-items: center;
+  display: inline-flex;
+  justify-content: center;
+  height: 48px;
+  width: 48px;
+  padding: 12px;
+  overflow: hidden;
+  /* theme styles*/
+  color: blue;
+  box-shadow: inset 0 0 0 1px currentColor;
+  border-radius: 8px;
+}
+.link-icon__icon {
+  width: auto;
+  width: 100%;
+  height: auto;
+}
 
-      .link-icon {
-        border-radius: 8px;
-        align-items: center;
-        justify-content: center;
-        display: inline-flex;
-        color: blue;
-        height: 48px;
-        width: 48px;
-        padding: 12px;
-        overflow: hidden;
-        box-shadow: inset 0 0 0 1px blue;
-      }
-      .link-icon__asset {
-        width: auto;
-        width: 100%;
-        height: auto;
-      }
+
+/* states */
+@media (hover: hover) {
+  a:hover {
+    color: red;
+  }
+} 
+
+:focus-visible {
+  color: red;
+  outline: var(--color-for-highlighting) solid 2px;
+  outline-offset: 0;
+}
+@supports not selector(:focus-visible) { /* fallback for browsers without focus-visible support */
+  :focus {
+    color: red;
+    outline: var(--color-for-highlighting) solid 2px;
+    outline-offset: 0;
+  }
+}
 
     </style>
   </head>
   <body>
-    <p>This is a <a href="index.html" class="link-text">link</a> within text.</p>
+    <p>1 This is a <a href="index.html" class="link-text">link</a> within text.</p>
     <br>
-    <a href="index.html" class="link">link to relative url</a>
+    <a href="index.html" class="link">2 link to relative url</a>
     <br><br>
-    <div style="width: 100px; border: 1px dashed lightgray">
-      <a href="index.html" class="link">link with looong word</a>
+    <div class="resizable">
+      <a href="index.html" class="link">3 link with looong word</a>
     </div>
     <br><br>
-    <a class="link-button" href="https://dora.michalostamou.me" target="_blank" rel="noopener noreferrer">
-      link to external url
+    <a class="link link--button" href="https://dora.michalostamou.me" target="_blank" rel="noopener noreferrer">
+      4 link to external url
       <span class="visually-hidden">
         (opens in a new window)
       </span>
     </a>
     <br><br>
-    <div style="width: 100px; border: 1px dashed lightgray;">
-      <a href="index.html" class="link-button">link with looong word</a>
+    <div class="resizable">
+      <a href="index.html" class="link link--button">5 link with looong word</a>
     </div>
     <br><br>
-    <div style="width: 500px; border: 1px dashed lightgray;">
-      <a href="index.html" class="link-button">link with looong word</a>
-      <a href="index.html" class="link" style="margin-left: 24px">link with looong word</a>
+    <div class="resizable" style="width: 500px;">
+      <a href="index.html" class="link link--button">6 link with looong word</a>
+      <a href="index.html" class="link" style="margin-left: 24px">7 link with looong word</a>
     </div>
     <br><br>
     <a href="#id" class="link">
       <svg class="link__icon" aria-hidden="true" width="24" height="24" viewBox="0 0 17 17" fill="currentColor">
         <rect x="0" width="17" height="17" />
       </svg>
-      <span class="link__text">link to an element id</span>
+      <span class="link__text">8 link to an element id</span>
     </a>
     <br><br>
-    <a href="#id" class="link-button">
-      <svg class="link-button__icon" aria-hidden="true" width="24" height="24" viewBox="0 0 17 17" fill="currentColor">
+    <a href="index.html" class="link link--button">
+      <svg class="link__icon" aria-hidden="true" width="24" height="24" viewBox="0 0 17 17" fill="currentColor">
         <rect x="0" width="17" height="17" />
       </svg>
-      <span class="link-button__text">link to an element id</span>
+      <span class="link__text">9 link with icon</span>
     </a>
     <br><br>
-    <div style="width: 150px; border: 1px dashed lightgray">
-      <a href="#id" class="link">
+    <div class="resizable">
+      <a href="index.html" class="link">
         <svg class="link__icon" aria-hidden="true" width="24" height="24" viewBox="0 0 17 17" fill="currentColor">
           <rect x="0" width="17" height="17" />
         </svg>
-        <span class="link__text">link to an element id</span>
+        <span class="link__text">10 link withiu icon and loooooooooong text</span>
       </a>
     </div>
     <br>
-    <div style="width: 150px; border: 1px dashed lightgray">
-      <a href="#id" class="link-button">
-        <svg class="link-button__icon" aria-hidden="true" width="24" height="24" viewBox="0 0 17 17" fill="currentColor">
-          <rect x="0" width="17" height="17" />
-        </svg>
-        <span class="link-button__text">link to an element id</span>
-      </a>
-    </div>
-    <br><br>
-    <div style="width: 140px; border: 1px dashed lightgray">
-      <a href="#id" class="link">
+    <div class="resizable">
+      <a href="index.html" class="link link--button">
         <svg class="link__icon" aria-hidden="true" width="24" height="24" viewBox="0 0 17 17" fill="currentColor">
           <rect x="0" width="17" height="17" />
         </svg>
-        <span class="link__text">link to an element id</span>
-        <svg class="link__icon" aria-hidden="true" width="24" height="24" viewBox="0 0 17 17" fill="currentColor">
-          <rect x="0" width="17" height="17" />
-        </svg>
+        <span class="link__text">11 button link with icon and loooooooooong text</span>
       </a>
     </div>
     <br><br>
-    <div style="width: 120px; border: 1px dashed lightgray">
-      <a href="#id" class="link">
-        <span class="link__text">link to an element id</span>
+    <div class="resizable">
+      <a href="index.html" class="link">
+        <span class="link__text">13 link with icon and loooooooooong text</span>
         <svg class="link__icon" aria-hidden="true" width="24" height="24" viewBox="0 0 17 17" fill="currentColor">
           <rect x="0" width="17" height="17" />
         </svg>
       </a>
     </div>
     <br><br>
-    <a href="/page" class="link-icon">
-      <svg class="link-icon__asset" aria-hidden="true" width="24" height="24" viewBox="0 0 17 17" fill="currentColor">
+    <a href="index.html" class="link-icon">
+      <svg class="link-icon__icon" aria-hidden="true" width="24" height="24" viewBox="0 0 17 17" fill="currentColor">
         <rect x="0" width="17" height="17" />
       </svg>
       <span class="visually-hidden">
-        link with content
+        14 link with content
       </span>
     </a>
     <br><br>
-    <a href="/page" class="link-icon">
-      <svg class="link-icon__asset" aria-hidden="true" width="60" height="60" viewBox="0 0 17 17" fill="red">
+    <a href="index.html" class="link-icon">
+      <svg class="link-icon__icon" aria-hidden="true" width="60" height="60" viewBox="0 0 17 17"  fill="currentColor">
         <rect x="0" width="17" height="17" />
       </svg>
       <span class="visually-hidden">
-        link with icon
+        15 link with icon
       </span>
     </a>
     <br>
     <br>
-    <a href="/page" class="link-icon">
-      <svg class="link-icon__asset" aria-hidden="true" width="10" height="10" viewBox="0 0 17 17" fill="green">
+    <a href="index.html" class="link-icon">
+      <svg class="link-icon__icon" aria-hidden="true" width="10" height="10" viewBox="0 0 17 17"  fill="currentColor">
         <rect x="0" width="17" height="17" />
       </svg>
       <span class="visually-hidden">
-        link with icon
+        16 link with icon
       </span>
     </a>
     <br><br>
 
     <div style="width: 1000px; border: 1px dashed lightgray;">
-      <a href="/page" class="link-icon">
-        <svg class="link-icon__asset" enable-background="new 0 0 56.693 56.693" height="56.693px" viewBox="0 0 56.693 56.693" width="56.693px">
+      <a href="index.html" class="link-icon">
+        <svg class="link-icon__icon" enable-background="new 0 0 56.693 56.693" height="56.693px" viewBox="0 0 56.693 56.693" width="56.693px" fill="currentColor">
           <path d="M52.837,15.065c-1.811,0.805-3.76,1.348-5.805,1.591c2.088-1.25,3.689-3.23,4.444-5.592c-1.953,1.159-4.115,2-6.418,2.454  c-1.843-1.964-4.47-3.192-7.377-3.192c-5.581,0-10.106,4.525-10.106,10.107c0,0.791,0.089,1.562,0.262,2.303  c-8.4-0.422-15.848-4.445-20.833-10.56c-0.87,1.492-1.368,3.228-1.368,5.082c0,3.506,1.784,6.6,4.496,8.412  c-1.656-0.053-3.215-0.508-4.578-1.265c-0.001,0.042-0.001,0.085-0.001,0.128c0,4.896,3.484,8.98,8.108,9.91  c-0.848,0.23-1.741,0.354-2.663,0.354c-0.652,0-1.285-0.063-1.902-0.182c1.287,4.015,5.019,6.938,9.441,7.019  c-3.459,2.711-7.816,4.327-12.552,4.327c-0.815,0-1.62-0.048-2.411-0.142c4.474,2.869,9.786,4.541,15.493,4.541  c18.591,0,28.756-15.4,28.756-28.756c0-0.438-0.009-0.875-0.028-1.309C49.769,18.873,51.483,17.092,52.837,15.065z"/>
         </svg>
         <span class="visually-hidden">
-          link with content
+          17 link with content
         </span>
       </a>
-      <a href="/page" class="link-icon">
-        <svg class="link-icon__asset" fill="none" height="44" width="44" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24">
+      <a href="index.html" class="link-icon">
+        <svg class="link-icon__icon" fill="none" height="44" width="44" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24">
           <circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" x2="15.42" y1="13.51" y2="17.49"/><line x1="15.41" x2="8.59" y1="6.51" y2="10.49"/>
         </svg>
         <span class="visually-hidden">
-          link with icon
+          18 link with icon
         </span>
       </a>
-      <a href="/page" class="link-icon">
-        <svg class="link-icon__asset" viewBox="0 0 128 128" xmlns="http://www.w3.org/2000/svg">
+      <a href="index.html" class="link-icon">
+        <svg class="link-icon__icon" viewBox="0 0 128 128" fill="currentColor">
           <path class="cls-1" d="M83,23a22,22,0,0,1,22,22V83a22,22,0,0,1-22,22H45A22,22,0,0,1,23,83V45A22,22,0,0,1,45,23H83m0-8H45A30.09,30.09,0,0,0,15,45V83a30.09,30.09,0,0,0,30,30H83a30.09,30.09,0,0,0,30-30V45A30.09,30.09,0,0,0,83,15Z"/>
           <path class="cls-1" d="M90.14,32a5.73,5.73,0,1,0,5.73,5.73A5.73,5.73,0,0,0,90.14,32Z"/>
           <path class="cls-1" d="M64.27,46.47A17.68,17.68,0,1,1,46.6,64.14,17.7,17.7,0,0,1,64.27,46.47m0-8A25.68,25.68,0,1,0,90,64.14,25.68,25.68,0,0,0,64.27,38.47Z"/>
         </svg>
         <span class="visually-hidden">
-          link with icon
+          19 link with icon
         </span>
         </a>
-        <a href="#id" class="link">
+        <a href="index.html" class="link">
           <svg class="link__icon" aria-hidden="true" width="24" height="24" viewBox="0 0 17 17" fill="currentColor">
             <rect x="0" width="17" height="17" />
           </svg>
-          <span class="link__text">link to an element id</span>
+          <span class="link__text">link</span>
         </a>
-        <a href="#id" class="link-button">
+        <a href="index.html" class="link link--button">
           <svg class="link__icon" aria-hidden="true" width="24" height="24" viewBox="0 0 17 17" fill="currentColor">
             <rect x="0" width="17" height="17" />
           </svg>
-          <span class="link-button__text">link to an element id</span>
+          <span class="link__text">link</span>
         </a>
       </a>
     </div>
-
     <div id="id" style="margin-top: 300px">element</div>
   </body>
 </html>
