@@ -121,18 +121,31 @@
 
 
 /* states */
+/* Unvisited links */
+a:link {
+  color: blue;
+}
+/* Visited links */
+a:visited {
+  color: purple;
+}
+/* Hovered links */
 a:hover {
-  color: greenyellow;
+  background: greenyellow;
+}
+/* Active links */
+a:active {
+  color: red;
 }
 
 :focus-visible {
-  color: red;
+  color: green;
   outline: var(--color-for-highlighting) solid 2px;
   outline-offset: 0;
 }
 @supports not selector(:focus-visible) { /* fallback for browsers without focus-visible support */
   :focus {
-    color: red;
+    color: green;
     outline: var(--color-for-highlighting) solid 2px;
     outline-offset: 0;
   }
